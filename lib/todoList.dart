@@ -1,3 +1,5 @@
+
+import 'package:flutter/material.dart';
 class TodoList extends StatefulWidget {
   @override
   createState() => new TodoListState();
@@ -53,36 +55,45 @@ class TodoListState extends State<TodoList> {
 
   BoxDecoration myBoxDecoration()  {
         return BoxDecoration(
+          color: Colors.white,
           border: Border(
             left: BorderSide(
               color: Colors.blue[100],
-              width: 10.0,
+              width: 5.0,
             ),
             top: BorderSide(
               color: Colors.blue[100],
-              width: 10.0,
+              width: 5.0,
             ),
             right: BorderSide(
               color: Colors.blue[100],
-              width: 10.0,
+              width: 5.0,
             ),
             bottom: BorderSide(
               color: Colors.blue[100],
-              width: 10.0,
+              width: 5.0,
             ),
           ),
+          boxShadow: [
+            new BoxShadow(
+              color: Colors.grey,
+              offset: new Offset(10.0, 10.0),
+              blurRadius: 20.0,
+            )
+          ],
         );
       }
 
-  // Todo itemS
+  // Todo items
   Widget _buildTodoItem(String todoText, int index) {
     return new Container(
     child: new ListTile(
-      title: new Text(todoText),
-      
+      title: new Text(todoText),      
       onTap: () => _promptRemoveTodoItem(index)
     ),
     decoration: myBoxDecoration(),
+    margin: EdgeInsets.all(10.0),
+    
     );
   }
 
@@ -91,8 +102,16 @@ class TodoListState extends State<TodoList> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Todo List')
-      ),
-      body: _buildTodoList(),
+      ),      
+      body: new Column(
+        children: <Widget>[
+    Text('Нажмите на задание, которое сделали, чтобы удалить'),
+    Expanded(
+      child: _buildTodoList(),
+      
+    ),
+  ], 
+      ),// _buildTodoList(),
       floatingActionButton: new FloatingActionButton(
         onPressed: _pushAddTodoScreen,
         tooltip: 'Add task',
